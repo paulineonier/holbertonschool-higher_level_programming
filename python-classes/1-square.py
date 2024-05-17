@@ -1,6 +1,9 @@
 #!/usr/bin/python3
-"""class square"""
+"""class square."""
+
 class Square:
     def __init__(self, size):
-"""private instance size"""
+
+"""private instance size."""
+
         self.__size = size
