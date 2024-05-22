@@ -1,14 +1,11 @@
-def print_square(size):
-    """
-    Prints a square with the character #.
+#!/usr/bin/python3
+"""
+Module 4-print_square
+Contains method that prints square with #'s
+Takes in an int size
+"""
 
-    Args:
-        size (int): The size length of the square.
 
-    Raises:
-        TypeError: If size is not an integer.
-        ValueError: If size is less than 0.
-    """
 def print_square(size):
     """
     Prints square with #'s given int size
