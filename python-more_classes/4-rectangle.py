@@ -1,30 +1,79 @@
 #!/usr/bin/python3
-"""Define a class Square"""
+"""
+Module 4-rectangle
+Contains class Rectangle with private attribute width and height,
+public area and perimeter methods, and allows printing #'s
 
-class Square:
-    """Represent a square"""
+"""
+class Rectangle:
+    """
+    Defines class rectangle with private attribute width and height
 
-    def __init__(self, size=0):
-        """Initialize a new square
+    Args:
+        width (int): width
+        height (int): height
 
-        Args:
-            size (int): The size of the new square
-        """
-        self.size = size
+    Functions:
+        __init__(self, width, height)
+        width(self)
+        width(self, value)
+        height(self)
+        height(self, value)
+        area(self)
+        perimeter(self)
+        __str__(self)
+        __repr__(self)
+    """
+    def __init__(self, width=0, height=0):
+        """ Initialize rectangles """
+        self.width = width
+        self.height = height
 
     @property
-    def size(self):
-        """Get/set the current size of the square"""
-        return (self.__size)
+    def width(self):
+        """ Getter returns width """
+        return self.__width
 
-    @size.setter
-    def size(self, value):
+    @width.setter
+    def width(self, value):
+        """ Setter sets width if int > 0 """
         if not isinstance(value, int):
-            raise TypeError("size must be an integer")
-        elif value < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = value
+            raise TypeError("width must be an integer")
+        if value < 0:
+            raise ValueError("width must be >= 0")
+        self.__width = value
+
+    @property
+    def height(self):
+        """ Getter returns height """
+        return self.__height
+
+    @height.setter
+    def height(self, value):
+        """ Setter sets height if int > 0 """
+        if not isinstance(value, int):
+            raise TypeError("height must be an integer")
+        if value < 0:
+            raise ValueError("height must be >= 0")
+        self.__height = value
 
     def area(self):
-        """Return the current area of the square."""
-        return (self.__size * self.__size)
+        """ Return width * height """
+        return self.__width * self.__height
+
+    def perimeter(self):
+        """ Return 2*width + 2*height (or return 0 if width or height is 0)"""
+        if self.__width == 0 or self.__height == 0:
+            return 0
+        return (2 * self.__width) + (2 * self.height)
+
+    def __str__(self):
+        """ Prints rectangle with #'s """
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        pic = "\n".join(["#" * self.__width for rows in range(self.__height)])
+        return pic
+
+    def __repr__(self):
+        """ String representation to recreate new instance """
+        return "Rectangle({:d}, {:d})".format(self.width, self.heig
