@@ -1,12 +1,22 @@
 [
     {
         "name": "John",
-        "age": "25",
-        "is_student": "True"
+        "age": "28",
+        "city": "New York"
     },
     {
-        "name": "Jane",
+        "name": "Alice",
+        "age": "24",
+        "city": "Los Angeles"
+    },
+    {
+        "name": "Bob",
         "age": "22",
-        "is_student": "False"
+        "city": "Chicago"
+    },
+    {
+        "name": "Eve",
+        "age": "30",
+        "city": "San Francisco"
     }
 ]
