@@ -1,18 +1,21 @@
 #!/usr/bin/python3
-"""
-Module 7-save_to_json_file
 
-Contains function that writes Python obj to file using JSON represenation
+"""Add item script"""
 
-"""
+import sys
 
-def save_to_json_file(my_obj, filename):
-    """Writes Python obj to file using JSON represenation
-    Args:
-        my_obj: python object
-        filename: file
-    """
-    import json
+save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
-    with open(filename, mode="w", encoding="utf-8") as f:
-        json.dump(my_obj, f)
+try:
+    lst = load_from_json_file("add_item.json")
+except:
+    lst = []
+
+argc = len(sys.argv)
+
+if argc > 1:
+    for i in range(1, argc):
+        lst.append(sys.argv[i])
+
+save_to_json_file(lst, "add_item.json")

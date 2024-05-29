@@ -1,18 +1,12 @@
 #!/usr/bin/python3
+"""save_to_json_file module.
+
+Contains a function that creates an Object from a “JSON file”.
 """
-Module 6-from_json_string
+import json
 
-Contains function that returns python data structure from JSON string
 
-"""
-
-def from_json_string(my_str):
-    """Returns python data structure from JSON string
-    Args:
-        my_str: json string representation
-    Return:
-        python object
-    """
-    import json
-
-    return json.loads(my_str)
+def load_from_json_file(filename):
+    """Creates an Object from a “JSON file”."""
+    with open(filename, 'r') as f:
+        return json.load(f)

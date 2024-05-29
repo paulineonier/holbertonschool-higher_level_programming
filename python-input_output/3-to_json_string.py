@@ -1,12 +1,11 @@
 #!/usr/bin/python3
+"""to_json_string module.
+
+Contains a function that returns the JSON representation of an object.
 """
-Module 3-write_file
+import json
 
-Contains function that writes to text file and returns num chars written
 
-"""
-
-def write_file(filename="", text=""):
-    """writes to text file and returns num chars written"""
-    with open(filename, mode="w", encoding="utf-8") as f:
-        return(f.write(text))
+def to_json_string(my_obj):
+    """Returns the JSON representation of an object (string)."""
+    return json.dumps(my_obj)
