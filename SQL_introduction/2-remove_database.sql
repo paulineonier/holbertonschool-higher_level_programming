@@ -1,0 +1,1 @@
+DELETE DATABASES hbtn_0c_0;
