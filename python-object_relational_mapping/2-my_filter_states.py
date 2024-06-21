@@ -9,7 +9,8 @@ import MySQLdb
 import sys import argv
 
 if __name__ == "__main__":
-   
+
+    # connect to database
     db = MySQLdb.connect(host="localhost",
                          port=3306,
                          user=argv[1],
@@ -18,11 +19,12 @@ if __name__ == "__main__":
 
     # create cursor to exec queries using SQL; match arg given
     cursor = db.cursor()
-    sql_cmd = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    cursor.execute(sql_cmd, (argv[4],))
-
+    sql_cmd = """SELECT *
+                 FROM states
+                 WHERE name LIKE '{:s}' ORDER BY id ASC""".format(argv[4])
+    cursor.execute(sql_cmd)
     for row in cursor.fetchall():
-        print(row)
-
+        if row[1] == argv[4]:
+            print(row)
     cursor.close()
     db.close()
