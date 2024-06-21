@@ -6,25 +6,22 @@ Parameters: mysql username, mysql password, database name, and state name search
 """
 
 import MySQLdb
-import sys
+import sys import argv
 
 if __name__ == "__main__":
-    
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    state_name = sys.argv[4]
+   
+    db = MySQLdb.connect(host="localhost",
+                         port=3306,
+                         user=argv[1],
+                         passwd=argv[2],
+                         db=argv[3])
 
-    db = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database)
+    # create cursor to exec queries using SQL; match arg given
     cursor = db.cursor()
+    sql_cmd = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+    cursor.execute(sql_cmd, (argv[4],))
 
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    
-    cursor.execute(query, (state_name,))
-
-    rows = cursor.fetchall()
-
-    for row in rows:
+    for row in cursor.fetchall():
         print(row)
 
     cursor.close()
