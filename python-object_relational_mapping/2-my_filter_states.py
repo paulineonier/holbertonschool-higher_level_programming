@@ -1,30 +1,39 @@
 #!/usr/bin/python3
 """
-Script that takes in an argument and displays all values in the states table
-of hbtn_0e_0_usa where name matches the argument.
-Parameters: mysql username, mysql password, database name, and state name searched
+Return matching states
+parameters given to script: username, password, database, state to match
 """
 
 import MySQLdb
-import sys import argv
+from sys import argv
 
 if __name__ == "__main__":
 
-    # connect to database
+    # Ensure correct number of command-line arguments
+    if len(argv) != 5:
+        print("Usage: {} <username> <password> <database> <state name>".format(argv[0]))
+        exit(1)
+
+    # Connect to the database
     db = MySQLdb.connect(host="localhost",
                          port=3306,
                          user=argv[1],
                          passwd=argv[2],
                          db=argv[3])
 
-    # create cursor to exec queries using SQL; match arg given
+    # Create cursor to execute queries using SQL
     cursor = db.cursor()
-    sql_cmd = """SELECT *
-                 FROM states
-                 WHERE name LIKE '{:s}' ORDER BY id ASC""".format(argv[4])
-    cursor.execute(sql_cmd)
-    for row in cursor.fetchall():
-        if row[1] == argv[4]:
+    try:
+        # Use parameterized query to avoid SQL injection
+        sql_cmd = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+        cursor.execute(sql_cmd, (argv[4],))
+
+        # Fetch and print matching rows
+        for row in cursor.fetchall():
             print(row)
-    cursor.close()
-    db.close()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        # Close cursor and database connection
+        cursor.close()
+        db.close()
